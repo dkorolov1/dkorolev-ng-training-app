@@ -1,10 +1,11 @@
-import { Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
-import { AuthData } from '../shared/models/authData';
-import { AuthService } from '../shared/services/auth.service';
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from '../auth/store/auth.actions';
+import * as fromAuth from './store/auth.selectors';
 
 @Component({
   selector: 'app-auth',
@@ -12,15 +13,20 @@ import { AuthService } from '../shared/services/auth.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  @ViewChild('authForm') authForm: NgForm;
+  @ViewChild('authForm')
+  authForm: NgForm;
 
-  loading: boolean = false;
-  logInMode: boolean = false;
-  errorMessage: string = null;
+  logInMode: boolean;
+  loading$: Observable<boolean>;
+  errorMessage$: Observable<string>;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private store: Store<fromApp.AppState>) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loading$ = this.store.select(fromAuth.getAuthLoading);
+    this.errorMessage$ = this.store.select(fromAuth.getAuthError);
+  }
 
   onSwitchMode() {
     this.logInMode = !this.logInMode;
@@ -29,23 +35,16 @@ export class AuthComponent implements OnInit {
   onSubmit() {
     if (!this.authForm.valid)
       return;
-    this.loading = true;
     const email = this.authForm.value.email;
     const password = this.authForm.value.password;
-    const authObs: Observable<AuthData> = this.logInMode
-      ? this.authService.logIn(email, password)
-      : this.authService.signUp(email, password);
-    authObs.subscribe(authData => {
-      this.loading = false;
-      this.router.navigate(['/recipes']);
-    }, (errorMessage: string) => {
-      this.loading = false;
-      this.errorMessage = errorMessage;
-    });
+    const action = this.logInMode
+      ? new AuthActions.LogInStart({email, password})
+      : new AuthActions.SignUpStart({email, password});
+    this.store.dispatch(action);
     this.authForm.reset();
   }
 
   onHandleError() {
-    this.errorMessage = null;
+    this.store.dispatch(new AuthActions.ClearError());
   }
 }

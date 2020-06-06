@@ -1,42 +1,33 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ApiService } from '../shared/api/api.service';
-import { AuthService } from '../shared/services/auth.service';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+
+import * as fromApp from '../store/app.reducer';
+import { User } from '../shared/models/user.model';
+import * as fromAuth from '../auth/store/auth.selectors';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent implements OnInit {
+    user$: Observable<User>;
     collapsed: boolean = true;
-    private userSub: Subscription;
-    authenticated: boolean = false;
 
-    constructor(private apiService: ApiService, private authService: AuthService) {}
+    constructor(private store: Store<fromApp.AppState>) {};
  
     ngOnInit(): void {
-        this.userSub = this.authService.user.subscribe(user => {
-            this.authenticated = !!user;
-        });
+        this.user$ = this.store
+            .select(fromAuth.getAuthUser);
     }
 
     onWindowRecize() {
         this.collapsed = true
     }
 
-    onSaveData() {
-        this.apiService.replaceRecipes();
-    }
-
-    onFetchData() {
-        this.apiService.fetchRecipes().subscribe();
-    }
-
-    ngOnDestroy(): void {
-        this.userSub.unsubscribe();
-    }
-
     onLogOut() {
-        this.authService.logOut();
+        this.store
+            .dispatch(new AuthActions.LogOut());
     }
 }

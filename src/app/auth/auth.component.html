@@ -5,15 +5,12 @@
                 <app-loading-spinner></app-loading-spinner>
             </div>
         </ng-template>
-        <!-- <div class="alert alert-danger" *ngIf="errorMessage">
-            <p>{{errorMessage}}</p>
-        </div> -->
-        <app-alert 
-            [message]="errorMessage"
+        <app-alert
             (close)="onHandleError()"
-            *ngIf="errorMessage">
+            *ngIf="errorMessage$ | async"
+            [message]="errorMessage$ | async">
         </app-alert>
-        <form #authForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!loading else spinner">
+        <form #authForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!(loading$ | async) else spinner">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input

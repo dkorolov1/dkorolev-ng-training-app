@@ -1,15 +1,19 @@
+import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { take, exhaustMap } from 'rxjs/operators';
+import { take, exhaustMap, map } from 'rxjs/operators';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpParams } from '@angular/common/http';
 
-import { AuthService } from './auth.service';
+import * as fromApp from '../store/app.reducer';
+import * as fromAuth from './store/auth.selectors';
 
 @Injectable()
 export class AuthInterсeptorService implements HttpInterceptor {
-    constructor(private authService: AuthService) {};
+    constructor(
+        private store: Store<fromApp.AppState>
+    ) {};
 
     intercept(originalRequest: HttpRequest<any>, next: HttpHandler) {
-        return this.authService.user.pipe(
+        return this.store.select(fromAuth.getAuthUser).pipe(
             take(1),
             exhaustMap(user => {
                 if (!user) {
@@ -21,6 +25,5 @@ export class AuthInterсeptorService implements HttpInterceptor {
                 return next.handle(modifiedRequest);
             })
         );
-
     }
 }

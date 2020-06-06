@@ -28,14 +28,14 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="imageUrl">Image Url</label>
-                        <input type="text" #imageUrl formControlName="imageUrl" id="imageUrl" class="form-control" />
+                        <label for="imagePath">Image Url</label>
+                        <input type="text" #imagePath formControlName="imagePath" id="imagePath" class="form-control" />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <img [src]="imageUrl.value" alt="" class="img-responsive">
+                    <img [src]="imagePath.value" alt="" class="img-responsive">
                 </div>
             </div>
             <div class="row">
@@ -48,7 +48,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-12" formArrayName="ingredients">
-                    <div 
+                    <div
                         class="row"
                         [formGroupName]="i"
                         style="margin-top: 10px;"
@@ -57,7 +57,7 @@
                             <input type="text" class="form-control" formControlName="name" />
                         </div>
                         <div class="col-xs-2">
-                            <input type="number" class="form-control" formControlName="amount" />
+                            <input type="text" class="form-control" formControlName="amount" />
                         </div>
                         <div class="col-xs-2">
                             <button
