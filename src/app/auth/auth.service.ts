@@ -10,12 +10,12 @@ import * as AuthActions from './store/auth.actions';
 export class AuthService {
     tokenExpirationTimer: any;
 
-    constructor(private store: Store<fromApp.AppState>) { };
+    constructor(private store: Store<fromApp.AppState>) {}
 
     setAutoLogOutTimer(expirationDuration: number) {
         this.tokenExpirationTimer =
             setTimeout(() => {
-                this.store.dispatch(new AuthActions.LogOut())
+                this.store.dispatch(new AuthActions.LogOut());
             }, expirationDuration);
     }
 

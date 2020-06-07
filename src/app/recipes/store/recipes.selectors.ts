@@ -12,18 +12,18 @@ export const getAllRecipes = createSelector(
     getRecipes,
     recipes => Object.keys(recipes)
         .map(key => recipes[key])
-)
+);
 
 export const getRecipesCount = createSelector(
     getRecipes,
     state => state.recipes
         ? Object.keys(state.recipes).length
         : 0,
-)
+);
 
 export const getSelectedRecipe = createSelector(
     getRecipes,
     fromApp.getRouterState,
-    (recipes, router) => router.state 
+    (recipes, router) => router.state
         && recipes[router.state.params.recipeId]
-)
+);

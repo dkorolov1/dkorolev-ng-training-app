@@ -17,14 +17,14 @@ export class ShoppingListEffects {
     constructor(
         private actions$: Actions,
         private httpClient: HttpClient,
-        private store: Store<fromApp.AppState>) { };
+        private store: Store<fromApp.AppState>) {}
 
     @Effect()
     fetchIngredients = this.actions$.pipe(
         ofType(ShoppingListActions.FETCH_INGREDIENTS),
         withLatestFrom(this.store.select(AuthSelectors.getAuthUser)),
         switchMap(([, user]) => {
-            const url: string = `${environment.fireBaseDbUrl}/sList/${user.id}.json`;
+            const url = `${environment.fireBaseDbUrl}/sList/${user.id}.json`;
             return this.httpClient.get<{ [key: string]: Ingredient }>(url).pipe(
                 map(ingredients => ingredients ? ingredients : {}),
                 map(ingredients => Object.keys(ingredients).reduce((acc, key) => {
@@ -33,7 +33,7 @@ export class ShoppingListEffects {
                 }, {})),
                 map(ingredients =>
                     new ShoppingListActions.FetchIngredientsSuccess(ingredients))
-            )
+            );
         })
     );
 
@@ -42,7 +42,7 @@ export class ShoppingListEffects {
         ofType(ShoppingListActions.ADD_INGREDIENTS),
         withLatestFrom(this.store.select(AuthSelectors.getAuthUser)),
         switchMap(([action, user]: [ShoppingListActions.AddIngredients, User]) => {
-            const url: string = `${environment.fireBaseDbUrl}/sList/${user.id}.json`;
+            const url = `${environment.fireBaseDbUrl}/sList/${user.id}.json`;
             return forkJoin(
                 action.payload.map(ingredient => {
                     return this.httpClient.post<{name: string}>(url, { ...ingredient }).pipe(
@@ -51,7 +51,7 @@ export class ShoppingListEffects {
                                 [name]: {
                                     ...ingredient, id: name
                                 }
-                            }
+                            };
                         })
                     );
                 })
@@ -61,7 +61,6 @@ export class ShoppingListEffects {
                         acc = {...acc, ...i};
                         return acc;
                     }, {});
-                    debugger;
                     return new ShoppingListActions.AddIngredientsSuccess(collapsedIngredients);
                 })
             );
@@ -74,15 +73,15 @@ export class ShoppingListEffects {
         withLatestFrom(this.store.select(AuthSelectors.getAuthUser)),
         mergeMap(([action, user]: [ShoppingListActions.UpdateIngredient, User]) => {
             const { id, ...ingredientData } = action.payload;
-            const url: string = `${environment.fireBaseDbUrl}/sList/${user.id}/${id}.json`;
+            const url = `${environment.fireBaseDbUrl}/sList/${user.id}/${id}.json`;
             return this.httpClient.put<Ingredient>(url, { ...ingredientData }).pipe(
                 map(ingredient => {
-                    return { ...ingredient, id: action.payload.id }
+                    return { ...ingredient, id: action.payload.id };
                 }),
                 map(ingredient =>
                     new ShoppingListActions.UpdateIngredientSuccess(ingredient)
                 )
-            )
+            );
         })
     );
 
@@ -91,12 +90,12 @@ export class ShoppingListEffects {
         ofType(ShoppingListActions.DELETE_INGREDIENT),
         withLatestFrom(this.store.select(AuthSelectors.getAuthUser)),
         switchMap(([action, user]: [ShoppingListActions.DeleteIngredient, User]) => {
-            const url: string = `${environment.fireBaseDbUrl}/sList/${user.id}/${action.payload}.json`;
+            const url = `${environment.fireBaseDbUrl}/sList/${user.id}/${action.payload}.json`;
             return this.httpClient.delete<null>(url).pipe(
                 map(() =>
                     new ShoppingListActions.DeleteIngredientSuccess(action.payload)
                 )
-            )
+            );
         })
     );
 }

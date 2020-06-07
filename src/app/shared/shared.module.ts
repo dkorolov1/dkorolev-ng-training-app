@@ -15,7 +15,7 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
         CommonModule
     ],
     exports: [
-        CommonModule,        
+        CommonModule,
         AlertComponent,
         DropdownDirective,
         LoadingSpinnerComponent

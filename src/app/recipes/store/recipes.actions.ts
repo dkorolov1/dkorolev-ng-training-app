@@ -20,35 +20,35 @@ export class FetchRecipes implements Action {
 
 export class FetchRecipesSuccess implements Action {
     readonly type: string = FETCH_RECIPES_SUCCESS;
-    constructor(public payload: { [key: string]: Recipe; }) {};
+    constructor(public payload: { [key: string]: Recipe; }) {}
 }
 
 export class AddRecipeSuccess implements Action {
     readonly type: string = ADD_RECIPE_SUCCESS;
-    constructor(public payload: Recipe) {};
+    constructor(public payload: Recipe) {}
 }
 
 export class AddRecipe implements Action {
     readonly type: string = ADD_RECIPE;
-    constructor(public payload: Recipe) {};
+    constructor(public payload: Recipe) {}
 }
 
 export class UpdateRecipe implements Action {
     readonly type: string = UPDATE_RECIPE;
-    constructor(public payload: Recipe) {};
+    constructor(public payload: Recipe) {}
 }
 
 export class UpdateRecipeSuccess implements Action {
     readonly type: string = UPDATE_RECIPE_SUCCESS;
-    constructor(public payload: Recipe) {};
+    constructor(public payload: Recipe) {}
 }
 
 export class DeleteRecipe implements Action {
     readonly type: string = DELETE_RECIPE;
-    constructor(public payload: string) {};
+    constructor(public payload: string) {}
 }
 
 export class DeleteRecipeSuccess implements Action {
     readonly type: string = DELETE_RECIPE_SUCCESS;
-    constructor(public payload: string) {};
+    constructor(public payload: string) {}
 }

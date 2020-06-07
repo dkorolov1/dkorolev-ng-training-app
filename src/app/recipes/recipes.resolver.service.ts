@@ -16,8 +16,8 @@ export class RecipesResolverService implements Resolve<any> {
     constructor(
         private store: Store<fromApp.AppState>,
         private actions$: Actions
-    ) {};
-    
+    ) {}
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.store.select(fromRecipes.getRecipesCount).pipe(
             take(1),

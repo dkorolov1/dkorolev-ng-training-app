@@ -3,8 +3,8 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
 const appRoutes: Routes = [
     {
-        path: '', 
-        redirectTo: '/recipes', 
+        path: '',
+        redirectTo: '/recipes',
         pathMatch: 'full'
     },
     {
@@ -32,9 +32,9 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes, 
-            { 
-                preloadingStrategy: PreloadAllModules 
+        RouterModule.forRoot(appRoutes,
+            {
+                preloadingStrategy: PreloadAllModules
             }
         )
     ],

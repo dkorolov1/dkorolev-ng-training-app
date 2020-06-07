@@ -7,7 +7,7 @@ import { switchMap, catchError, map, tap } from 'rxjs/operators';
 
 import * as AuthActions from '../store/auth.actions';
 import { User } from 'src/app/shared/models/user.model';
-import { AuthData } from 'src/app/shared/models/authData';
+import { AuthData } from 'src/app/shared/models/authData.model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
 
@@ -37,6 +37,7 @@ const handleError = (errorData: any) => {
                 break;
             case 'USER_DISABLED':
                 errorMessage = 'The user account has been disabled by an administrator.';
+                break;
             case 'EMAIL_EXISTS':
                 errorMessage = 'The email address is already in use by another account.';
                 break;
@@ -48,7 +49,7 @@ const handleError = (errorData: any) => {
         }
     }
     return of(new AuthActions.AuthFail(errorMessage));
-}
+};
 
 @Injectable()
 export class AuthEffects {
@@ -56,26 +57,21 @@ export class AuthEffects {
         private authService: AuthService,
         private router: Router,
         private httpClient: HttpClient,
-        private actions$: Actions) { };
-
-    setAutoLogOutTimer(d: number) {
-        this.authService
-            .setAutoLogOutTimer(d);
-    }
+        private actions$: Actions) {}
 
     @Effect()
     authLogIn = this.actions$.pipe(
         ofType(AuthActions.LOGIN_START),
-        switchMap((authData: AuthActions.LogInStart) => {
+        switchMap((action: AuthActions.LogInStart) => {
             return this.httpClient
                 .post<AuthData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.fireBaseApiKey}`,
                     {
                         returnSecureToken: true,
-                        email: authData.payload.email,
-                        password: authData.payload.password
+                        email: action.payload.email,
+                        password: action.payload.password
                     }
                 ).pipe(
-                    tap((authData) => this.setAutoLogOutTimer(+authData.expiresIn * 1000)),
+                    tap(authData => this.setAutoLogOutTimer(+authData.expiresIn * 1000)),
                     map(handleAuthentification),
                     catchError(handleError)
                 );
@@ -88,8 +84,9 @@ export class AuthEffects {
     authRedirect = this.actions$.pipe(
         ofType(AuthActions.AUTH_SUCCESS),
         tap((authSuccessAction: AuthActions.AuthSuccess) => {
-            if (authSuccessAction.payload.redirect)
-                this.router.navigate(['/'])
+            if (authSuccessAction.payload.redirect) {
+                this.router.navigate(['/']);
+            }
         })
     );
 
@@ -106,13 +103,13 @@ export class AuthEffects {
     @Effect()
     sihnUp = this.actions$.pipe(
         ofType(AuthActions.SIGNUP_START),
-        switchMap((authData: AuthActions.SignUpStart) => {
+        switchMap((action: AuthActions.SignUpStart) => {
             return this.httpClient
                 .post<AuthData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.fireBaseApiKey}`,
                     {
                         returnSecureToken: true,
-                        email: authData.payload.email,
-                        password: authData.payload.password
+                        email: action.payload.email,
+                        password: action.payload.password
                     }
                 )
                 .pipe(
@@ -132,7 +129,7 @@ export class AuthEffects {
             this.authService.clearLogoutTimer();
             localStorage.removeItem(USER_DATA_LOCAL_STORAGE_KEY);
         })
-    )
+    );
 
     @Effect()
     autoLogIn = this.actions$.pipe(
@@ -162,5 +159,10 @@ export class AuthEffects {
             }
             return { type: '<EMPTY>' };
         })
-    )
+    );
+
+    setAutoLogOutTimer(d: number) {
+        this.authService
+            .setAutoLogOutTimer(d);
+    }
 }

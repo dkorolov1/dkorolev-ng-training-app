@@ -33,8 +33,9 @@ export class AuthComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.authForm.valid)
+    if (!this.authForm.valid) {
       return;
+    }
     const email = this.authForm.value.email;
     const password = this.authForm.value.password;
     const action = this.logInMode

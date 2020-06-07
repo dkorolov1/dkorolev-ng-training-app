@@ -23,42 +23,42 @@ export class FetchIngredients implements Action {
 
 export class FetchIngredientsSuccess implements Action {
     readonly type: string = FETCH_INGREDIENTS_SUCCESS;
-    constructor(public payload: { [key: string]: Ingredient; }) {};
+    constructor(public payload: { [key: string]: Ingredient; }) {}
 }
 
 export class AddIngredients implements Action {
     readonly type: string = ADD_INGREDIENTS;
-    constructor(public payload: Ingredient[]) {};
+    constructor(public payload: Ingredient[]) {}
 }
 
 export class AddIngredientsSuccess implements Action {
     readonly type: string = ADD_INGREDIENTS_SUCCESS;
-    constructor(public payload: { [key: string]: Ingredient; }) {};
+    constructor(public payload: { [key: string]: Ingredient; }) {}
 }
 
 export class UpdateIngredient implements Action {
     readonly type: string = UPDATE_INGREDIENT;
-    constructor(public payload: Ingredient) {};
+    constructor(public payload: Ingredient) {}
 }
 
 export class UpdateIngredientSuccess implements Action {
     readonly type: string = UPDATE_INGREDIENT_SUCCESS;
-    constructor(public payload: Ingredient) {};
+    constructor(public payload: Ingredient) {}
 }
 
 export class DeleteIngredient implements Action {
     readonly type: string = DELETE_INGREDIENT;
-    constructor(public payload: string) {};
+    constructor(public payload: string) {}
 }
 
 export class DeleteIngredientSuccess implements Action {
     readonly type: string = DELETE_INGREDIENT_SUCCESS;
-    constructor(public payload: string) {};
+    constructor(public payload: string) {}
 }
 
 export class StartEditIngredient implements Action {
     readonly type: string = START_EDIT;
-    constructor(public payload: string) {};
+    constructor(public payload: string) {}
 }
 
 export class StopEditIngredient implements Action {

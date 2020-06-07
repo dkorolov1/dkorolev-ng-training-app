@@ -13,17 +13,17 @@ import * as AuthActions from '../auth/store/auth.actions';
 })
 export class HeaderComponent implements OnInit {
     user$: Observable<User>;
-    collapsed: boolean = true;
+    collapsed = true;
 
-    constructor(private store: Store<fromApp.AppState>) {};
- 
+    constructor(private store: Store<fromApp.AppState>) {}
+
     ngOnInit(): void {
         this.user$ = this.store
             .select(fromAuth.getAuthUser);
     }
 
     onWindowRecize() {
-        this.collapsed = true
+        this.collapsed = true;
     }
 
     onLogOut() {

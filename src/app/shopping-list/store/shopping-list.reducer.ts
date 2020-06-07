@@ -6,7 +6,7 @@ import { Ingredient } from '../../shared/models/ingredient.model';
 export interface State {
     editedIngredient: Ingredient;
     editedIngredientId: string;
-    ingredients: { [key: string]: Ingredient; }
+    ingredients: { [key: string]: Ingredient; };
 }
 
 const initialState: State = {
@@ -25,7 +25,6 @@ export function shoppingListReducer(state = initialState, action: any): State {
                 }
             };
         case ShoppingListActions.ADD_INGREDIENTS_SUCCESS:
-            debugger;
             return {
                 ...state,
                 ingredients: {
@@ -61,7 +60,7 @@ export function shoppingListReducer(state = initialState, action: any): State {
                 editedIngredient: null,
                 editedIngredientId: null
             };
-        default: return state; 
+        default: return state;
     }
 }
 

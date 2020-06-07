@@ -13,10 +13,10 @@ import * as fromAuth from './store/auth.selectors';
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private store: Store<fromApp.AppState>) {};
+        private store: Store<fromApp.AppState>) {}
 
     canActivate(
-        route: ActivatedRouteSnapshot, 
+        route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean|UrlTree> | Promise<boolean|UrlTree> | boolean | UrlTree
     {
         return this.store.select(fromAuth.getAuthUser).pipe(

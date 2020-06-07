@@ -10,7 +10,7 @@ import * as fromAuth from './store/auth.selectors';
 export class AuthInterсeptorService implements HttpInterceptor {
     constructor(
         private store: Store<fromApp.AppState>
-    ) {};
+    ) {}
 
     intercept(originalRequest: HttpRequest<any>, next: HttpHandler) {
         return this.store.select(fromAuth.getAuthUser).pipe(

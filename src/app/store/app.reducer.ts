@@ -24,7 +24,7 @@ export const appReducer: ActionReducerMap<AppState> = {
     auth: fromAuth.authReducer,
     recipes: fromRecipes.recipesReducer,
     shoppingList: fromShoppingList.shoppingListReducer
-}
+};
 
 export const getRouterState =
-    createFeatureSelector<RouterReducerState<RouterStateUrl>>("router");
+    createFeatureSelector<RouterReducerState<RouterStateUrl>>('router');

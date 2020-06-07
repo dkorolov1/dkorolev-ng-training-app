@@ -6,11 +6,11 @@
             </div>
         </ng-template>
         <app-alert
-            (close)="onHandleError()"
+            (closeAlert)="onHandleError()"
             *ngIf="errorMessage$ | async"
             [message]="errorMessage$ | async">
         </app-alert>
-        <form #authForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="!(loading$ | async) else spinner">
+        <form #authForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="(loading$ | async) === false else spinner">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input

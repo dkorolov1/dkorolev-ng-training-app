@@ -1,6 +1,6 @@
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { take, switchMap } from 'rxjs/operators';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -14,8 +14,8 @@ export class ShoppingListResolverService implements Resolve<any> {
     constructor(
         private store: Store<fromApp.AppState>,
         private actions$: Actions
-    ) {};
-    
+    ) {}
+
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return this.store.select(ShoppingListSelectors.getIngredientsCount).pipe(
             take(1),

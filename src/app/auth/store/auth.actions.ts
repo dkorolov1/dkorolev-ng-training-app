@@ -12,7 +12,7 @@ export const SIGNUP_START = 'SIGNUP_START';
 
 export class AuthSuccess implements Action {
     readonly type: string = AUTH_SUCCESS;
-    constructor(public payload: { user: User, redirect: boolean }) {};
+    constructor(public payload: { user: User, redirect: boolean }) {}
 }
 
 export class LogOut implements Action {

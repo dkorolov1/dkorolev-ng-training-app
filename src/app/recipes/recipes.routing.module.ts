@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '../auth/auth-guard';
 import { RecipesComponent } from './recipes.component';
-import { RecipesResolverService } from './recipes-resolver.service';
+import { RecipesResolverService } from './recipes.resolver.service';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
@@ -18,7 +18,7 @@ const recipesRoutes: Routes = [
                 path: 'new',
                 component: RecipeEditComponent},
             {
-                path: ':recipeId', 
+                path: ':recipeId',
                 component: RecipeDetailComponent
             },
             {

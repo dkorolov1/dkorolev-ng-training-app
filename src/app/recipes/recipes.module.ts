@@ -22,12 +22,12 @@ import { RecipeItemComponent } from './recipe-list/recipe-item/recipe-item.compo
         // ng
         RouterModule,
         ReactiveFormsModule,
-        // shared 
+        // shared
         SharedModule,
         // routing
         RecipesRountingModule
     ]
 })
 export class RecipesModule {
-    
+
 }

@@ -14,7 +14,7 @@ import { AuthEffects } from './store/auth.effects';
     imports: [
         // ng
         FormsModule,
-        // shared 
+        // shared
         SharedModule,
         // routing
         AuthRoutingModule

@@ -17,7 +17,7 @@ import * as ShoppingListSelectors from './store/shopping-list.selectors';
       // final state
       state('in', style({
         opacity: 1,
-        transform: 'translateX(0px)' 
+        transform: 'translateX(0px)'
       })),
       // from not existing state to any state (adding items)
       transition('void => *', [
@@ -37,20 +37,19 @@ import * as ShoppingListSelectors from './store/shopping-list.selectors';
         }))
       ])
     ])
-  ] 
+  ]
 })
 export class ShoppingListComponent implements OnInit {
   ingredients$: Observable<Ingredient[]>;
 
   constructor(private store: Store<fromApp.AppState>) { }
-  
+
   ngOnInit(): void {
     this.ingredients$ = this.store
       .select(ShoppingListSelectors.getAllIngredients);
   }
 
   onEditItem(id: string) {
-    debugger;
-    this.store.dispatch(new ShoppingListActions.StartEditIngredient(id))
+    this.store.dispatch(new ShoppingListActions.StartEditIngredient(id));
   }
 }

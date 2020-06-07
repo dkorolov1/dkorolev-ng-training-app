@@ -28,8 +28,8 @@ import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects
   ],
   imports: [
     // ng
-    BrowserModule.withServerTransition({ 
-      appId: 'serverApp' 
+    BrowserModule.withServerTransition({
+      appId: 'serverApp'
     }),
     HttpClientModule,
     // shared
@@ -49,8 +49,8 @@ import { ShoppingListEffects } from './shopping-list/store/shopping-list.effects
     // ng animation
     BrowserAnimationsModule,
     // service worker
-    ServiceWorkerModule.register('ngsw-worker.js', { 
-      enabled: environment.production 
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production
     })
   ],
   providers: [{
