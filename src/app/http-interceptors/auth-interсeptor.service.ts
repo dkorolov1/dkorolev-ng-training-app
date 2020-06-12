@@ -1,10 +1,10 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { take, exhaustMap, map } from 'rxjs/operators';
+import { take, exhaustMap } from 'rxjs/operators';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpParams } from '@angular/common/http';
 
 import * as fromApp from '../store/app.reducer';
-import * as fromAuth from './store/auth.selectors';
+import * as fromAuth from '../auth/store/auth.selectors';
 
 @Injectable()
 export class AuthInterсeptorService implements HttpInterceptor {

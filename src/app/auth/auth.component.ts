@@ -1,31 +1,39 @@
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 
 import * as fromApp from '../store/app.reducer';
-import * as AuthActions from '../auth/store/auth.actions';
 import * as fromAuth from './store/auth.selectors';
+import * as AuthActions from '../auth/store/auth.actions';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild('authForm')
   authForm: NgForm;
 
+  loading: boolean;
   logInMode: boolean;
-  loading$: Observable<boolean>;
-  errorMessage$: Observable<string>;
+  errorMessage: string;
 
-  constructor(
-    private store: Store<fromApp.AppState>) { }
+  authErrorStoreSubscription: Subscription;
+  authLoadingStoreSubscription: Subscription;
+
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
-    this.loading$ = this.store.select(fromAuth.getAuthLoading);
-    this.errorMessage$ = this.store.select(fromAuth.getAuthError);
+    this.authLoadingStoreSubscription = this.store.select(fromAuth.getAuthLoading)
+      .subscribe(loading => {
+        this.loading = loading;
+      });
+    this.authErrorStoreSubscription = this.store.select(fromAuth.getAuthError)
+      .subscribe(errorMessage => {
+        this.errorMessage = errorMessage;
+      });
   }
 
   onSwitchMode() {
@@ -39,13 +47,18 @@ export class AuthComponent implements OnInit {
     const email = this.authForm.value.email;
     const password = this.authForm.value.password;
     const action = this.logInMode
-      ? new AuthActions.LogInStart({email, password})
-      : new AuthActions.SignUpStart({email, password});
+      ? AuthActions.logIn({ email, password })
+      : AuthActions.signUp({ email, password });
     this.store.dispatch(action);
     this.authForm.reset();
   }
 
   onHandleError() {
-    this.store.dispatch(new AuthActions.ClearError());
+    this.store.dispatch(AuthActions.clearError());
+  }
+
+  ngOnDestroy(): void {
+    this.authErrorStoreSubscription.unsubscribe();
+    this.authLoadingStoreSubscription.unsubscribe();
   }
 }

@@ -1,16 +1,17 @@
 <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
         <ng-template #spinner>
-            <div class="spinner">
+            <div id="spinner">
                 <app-loading-spinner></app-loading-spinner>
             </div>
         </ng-template>
-        <app-alert
-            (closeAlert)="onHandleError()"
-            *ngIf="errorMessage$ | async"
-            [message]="errorMessage$ | async">
-        </app-alert>
-        <form #authForm="ngForm" (ngSubmit)="onSubmit()" *ngIf="(loading$ | async) === false else spinner">
+        <div id="error-message" *ngIf="errorMessage">
+            <app-alert
+                (closeAlert)="onHandleError()"
+                [message]="errorMessage">
+            </app-alert>
+        </div>
+        <form #authForm="ngForm" id="authForm" (ngSubmit)="onSubmit()" *ngIf="loading === false else spinner">
             <div class="form-group">
                 <label for="email">Email</label>
                 <input
@@ -36,6 +37,7 @@
             <div class="row">
                 <div class="col-sm-6 btn-toolbar">
                     <button
+                        id="submit"
                         type="submit"
                         class="btn btn-primary" 
                         [disabled]="!authForm.valid">
@@ -43,6 +45,7 @@
                     </button>
                     <button
                         type="button"
+                        id="swith-mode"
                         class="btn btn-success"
                         (click)="onSwitchMode()">
                         {{ logInMode ? 'Switch to Sign Up' : 'Switch to Log in' }}

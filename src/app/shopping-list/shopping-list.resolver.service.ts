@@ -1,13 +1,13 @@
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { take, switchMap } from 'rxjs/operators';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import * as fromApp from '../store/app.reducer';
-import * as ShoppingListSelectors from './store/shopping-list.selectors';
 import * as ShoppingListActions from './store/shopping-list.actions';
+import * as ShoppingListSelectors from './store/shopping-list.selectors';
 
 @Injectable({providedIn: 'root'})
 export class ShoppingListResolverService implements Resolve<any> {
@@ -16,14 +16,14 @@ export class ShoppingListResolverService implements Resolve<any> {
         private actions$: Actions
     ) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve() {
         return this.store.select(ShoppingListSelectors.getIngredientsCount).pipe(
             take(1),
             switchMap(count => {
                 if (count === 0) {
-                    this.store.dispatch(new ShoppingListActions.FetchIngredients());
+                    this.store.dispatch(ShoppingListActions.fetchIngredients());
                     return this.actions$.pipe(
-                        ofType(ShoppingListActions.FETCH_INGREDIENTS_SUCCESS),
+                        ofType(ShoppingListActions.fetchIngredientsSuccess),
                         take(1)
                     );
                 } else {

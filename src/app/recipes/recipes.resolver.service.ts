@@ -1,9 +1,9 @@
 import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Resolve } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { take, switchMap } from 'rxjs/operators';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import * as fromApp from 'src/app/store/app.reducer';
 import * as fromRecipes from './store/recipes.selectors';
@@ -18,14 +18,14 @@ export class RecipesResolverService implements Resolve<any> {
         private actions$: Actions
     ) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve() {
         return this.store.select(fromRecipes.getRecipesCount).pipe(
             take(1),
             switchMap(count => {
                 if (count === 0) {
-                    this.store.dispatch(new RecipesActions.FetchRecipes());
+                    this.store.dispatch(RecipesActions.fetchRecipes());
                     return this.actions$.pipe(
-                        ofType(RecipesActions.FETCH_RECIPES_SUCCESS),
+                        ofType(RecipesActions.fetchRecipesSuccess),
                         take(1)
                     );
                 } else {

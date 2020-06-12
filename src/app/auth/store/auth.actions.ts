@@ -1,43 +1,24 @@
-import { Action } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 import { User } from 'src/app/shared/models/user.model';
 
-export const LOGOUT = 'LOGOUT';
-export const AUTH_FAIL = 'AUTH_FAIL';
-export const AUTO_LOGIN = 'AUTO_LOGIN';
-export const LOGIN_START = 'LOGIN_START';
-export const CLEAR_ERROR = 'CLEAR_ERROR';
-export const AUTH_SUCCESS = 'AUTH_SUCCESS';
-export const SIGNUP_START = 'SIGNUP_START';
+export const authSuccess = createAction(
+    '[Auth] AUTH_SUCCESS', props<{ user: User, redirect: boolean }>());
 
-export class AuthSuccess implements Action {
-    readonly type: string = AUTH_SUCCESS;
-    constructor(public payload: { user: User, redirect: boolean }) {}
-}
+export const signUp = createAction(
+    '[Auth] SIGNUP', props<{ email: string; password: string }>());
 
-export class LogOut implements Action {
-    readonly type: string = LOGOUT;
-}
+export const logIn = createAction(
+    '[Auth] LOGIN', props<{ email: string; password: string }>());
 
-export class LogInStart implements Action {
-    readonly type: string = LOGIN_START;
-    constructor(public payload: { email: string; password: string }) {}
-}
+export const authFail = createAction(
+    '[Auth] AUTH_FAIL', props<{ error: string }>());
 
-export class AuthFail implements Action {
-    readonly type: string = AUTH_FAIL;
-    constructor(public payload: string) {}
-}
+export const clearError = createAction(
+    '[Auth] CLEAR_ERROR');
 
-export class SignUpStart implements Action {
-    readonly type: string = SIGNUP_START;
-    constructor(public payload: { email: string; password: string }) {}
-}
+export const autoLogIn = createAction(
+    '[Auth] AUTO_LOGIN');
 
-export class ClearError implements Action {
-    readonly type: string = CLEAR_ERROR;
-}
-
-export class AutoLogIn implements Action {
-    readonly type: string = AUTO_LOGIN;
-}
+export const logOut = createAction(
+    '[Auth] LOGOUT');

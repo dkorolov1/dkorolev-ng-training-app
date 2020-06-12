@@ -28,11 +28,14 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   onAddToShoppingList() {
-    this.store.dispatch(new ShoppingListActions.AddIngredients(this.recipe.ingredients));
+    this.store.dispatch(ShoppingListActions.addIngredients({
+      ingredients: this.recipe.ingredients
+    }));
   }
 
   onDeleteRecipe() {
-    this.store.dispatch(new RecipesActions.DeleteRecipe(this.recipe.id));
+    const id = this.recipe.id;
+    this.store.dispatch(RecipesActions.deleteRecipe({ id }));
     this.router.navigate(['recipes']);
   }
 }

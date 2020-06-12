@@ -46,22 +46,31 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const ingredientData = new Ingredient(iName, iAmount);
     let action = null;
     if (this.editMode) {
-      action = new ShoppingListActions.UpdateIngredient(
-        { id: this.editedIngredient.id, ...ingredientData });
+      action = ShoppingListActions.updateIngredient(
+        {
+          ingredient: {
+            id: this.editedIngredient.id,
+            ...ingredientData
+          }
+        });
     } else {
-      action = new ShoppingListActions.AddIngredients([ingredientData]);
+      action = ShoppingListActions.addIngredients({
+        ingredients: [ingredientData]
+      });
     }
     this.store.dispatch(action);
     this.onClear();
   }
 
   onClear() {
-    this.store.dispatch(new ShoppingListActions.StopEditIngredient());
+    this.store.dispatch(ShoppingListActions.stopEditIngredient());
     this.clear();
   }
 
   onDelete() {
-    this.store.dispatch(new ShoppingListActions.DeleteIngredient(this.editedIngredient.id));
+    this.store.dispatch(ShoppingListActions.deleteIngredient({
+      id: this.editedIngredient.id
+    }));
     this.clear();
   }
 
@@ -73,6 +82,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.editModeSubscription.unsubscribe();
-    this.store.dispatch(new ShoppingListActions.StopEditIngredient());
+    this.store.dispatch(ShoppingListActions.stopEditIngredient());
   }
 }

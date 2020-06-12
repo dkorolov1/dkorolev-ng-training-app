@@ -1,12 +1,12 @@
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 
 import * as fromApp from 'src/app/store/app.reducer';
 import * as fromRecipes from '../store/recipes.selectors';
-import * as RecipesActions from '../../recipes/store/recipes.actions';
 import { Recipe } from 'src/app/shared/models/recipe.model';
+import * as RecipesActions from '../../recipes/store/recipes.actions';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -84,10 +84,10 @@ export class RecipeEditComponent implements OnInit {
     const recipeData = {...this.recipeForm.value};
     if (this.editMode) {
       this.store.dispatch(
-        new RecipesActions.UpdateRecipe({id: this.editedRecipeId, ...recipeData}));
+        RecipesActions.updateRecipe({ id: this.editedRecipeId, ...recipeData }));
     } else {
       this.store.dispatch(
-        new RecipesActions.AddRecipe(recipeData));
+        RecipesActions.addRecipe(recipeData));
     }
     this.goBack();
   }

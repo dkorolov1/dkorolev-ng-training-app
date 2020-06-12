@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 import * as fromApp from '../store/app.reducer';
 import { Ingredient } from '../shared/models/ingredient.model';
@@ -50,6 +50,6 @@ export class ShoppingListComponent implements OnInit {
   }
 
   onEditItem(id: string) {
-    this.store.dispatch(new ShoppingListActions.StartEditIngredient(id));
+    this.store.dispatch(ShoppingListActions.startEditIngredient({ id }));
   }
 }

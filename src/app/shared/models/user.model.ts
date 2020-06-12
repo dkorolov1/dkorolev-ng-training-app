@@ -2,15 +2,17 @@ export class User {
     constructor(
         public email: string,
         public id: string,
-        private tokenInt: string,
-        private tokenExpirationDate: Date
+        public token: string,
+        public tokenExpirationDate: Date
     ) {}
 
-    get token() {
-        const currentDate: Date = new Date();
-        if (!this.tokenExpirationDate || currentDate > this.tokenExpirationDate) {
-            return null;
-        }
-        return this.tokenInt;
+    get tokenValid() {
+        return this.tokenExpirationDate
+            && new Date() < this.tokenExpirationDate;
+    }
+
+    get tokenExpiresIn() {
+        return this.tokenExpirationDate.getTime()
+            - new Date().getTime()
     }
 }

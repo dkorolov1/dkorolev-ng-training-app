@@ -7,16 +7,16 @@ import * as AuthActions from './store/auth.actions';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthService {
+export class AutoLogOutService {
     tokenExpirationTimer: any;
 
     constructor(private store: Store<fromApp.AppState>) {}
 
-    setAutoLogOutTimer(expirationDuration: number) {
+    setAutoLogOutTimer(expirationDurationMs: number) {
         this.tokenExpirationTimer =
             setTimeout(() => {
-                this.store.dispatch(new AuthActions.LogOut());
-            }, expirationDuration);
+                this.store.dispatch(AuthActions.logOut());
+            }, expirationDurationMs);
     }
 
     clearLogoutTimer() {

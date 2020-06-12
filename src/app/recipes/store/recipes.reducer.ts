@@ -1,45 +1,45 @@
-import { createFeatureSelector } from '@ngrx/store';
+import { createFeatureSelector, Action, createReducer, on } from '@ngrx/store';
 
 import * as RecipesActions from './recipes.actions';
 import { Recipe } from 'src/app/shared/models/recipe.model';
 
-export interface State {
+export interface RecipesState {
     recipes: { [key: string]: Recipe; };
 }
 
-const initialState: State = {
+const initialState: RecipesState = {
     recipes: {}
 };
 
-export function recipesReducer(state = initialState, action: any) {
-    switch (action.type) {
-        case RecipesActions.FETCH_RECIPES_SUCCESS: {
-            return {
-                ...state,
-                recipes: {...action.payload}
-            };
+const reducer = createReducer(
+    initialState,
+    on(RecipesActions.fetchRecipesSuccess, (state, { recipes }) => ({
+        ...state,
+        recipes
+    })),
+    on(RecipesActions.addRecipeSuccess, RecipesActions.updateRecipeSuccess, (state, { recipe }) => ({
+        ...state,
+        recipes: {
+            ...state.recipes,
+            [recipe.id]: {...recipe}
         }
-        case RecipesActions.ADD_RECIPE_SUCCESS:
-        case RecipesActions.UPDATE_RECIPE_SUCCESS: {
-            return {
-                ...state,
-                recipes: {
-                    ...state.recipes,
-                    [action.payload.id]: {...action.payload}
-                }
-            };
+    })),
+    on(RecipesActions.deleteRecipeSuccess, (state, { id }) => {
+        const newRecipes = {...state.recipes};
+        delete newRecipes[id];
+        return {
+            ...state,
+            recipes: newRecipes
         }
-        case RecipesActions.DELETE_RECIPE_SUCCESS: {
-            const newRecipes = {...state.recipes};
-            delete newRecipes[action.payload];
-            return {
-                ...state,
-                recipes: newRecipes
-            };
-        }
-        default: return state;
-    }
+    })
+);
+
+export function recipesReducer(
+    state: RecipesState | undefined,
+    action: Action
+): RecipesState {
+    return reducer(state, action);
 }
 
 export const getRecipesState =
-    createFeatureSelector<State>('recipes');
+    createFeatureSelector<RecipesState>('recipes');

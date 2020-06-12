@@ -1,6 +1,6 @@
 import { Params } from '@angular/router';
-import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 
 import * as fromAuth from '../auth/store/auth.reducer';
 import * as fromRecipes from '../recipes/store/recipes.reducer';
@@ -13,9 +13,11 @@ export interface RouterStateUrl {
 }
 
 export interface AppState {
-    auth: fromAuth.State;
-    recipes: fromRecipes.State;
-    shoppingList: fromShoppingList.State;
+    // features
+    auth: fromAuth.AuthState;
+    recipes: fromRecipes.RecipesState;
+    shoppingList: fromShoppingList.ShoppingListState;
+    // routing
     router: RouterReducerState<RouterStateUrl>;
 }
 

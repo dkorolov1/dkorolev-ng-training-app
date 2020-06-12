@@ -1,55 +1,54 @@
+import { createFeatureSelector, createReducer, on, Action } from '@ngrx/store';
 
 import * as AuthActions from './auth.actions';
 import { User } from 'src/app/shared/models/user.model';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-export interface State {
+export interface AuthState {
     user: User;
     loading: boolean;
     authError: string;
 }
 
-const initialState: State = {
+export const initialState: AuthState = {
     user: null,
     loading: false,
     authError: null
 };
 
-export function authReducer(state = initialState, action: any) {
-    switch (action.type) {
-        case AuthActions.LOGIN_START:
-        case AuthActions.SIGNUP_START:
-            return {
-                ...state,
-                loading: true,
-                authError: null
-            };
-        case AuthActions.AUTH_SUCCESS:
-            return {
-                loading: false,
-                authError: null,
-                user: action.payload.user
-            };
-        case AuthActions.AUTH_FAIL:
-            return {
-                user: null,
-                loading: false,
-                authError: action.payload
-            };
-        case AuthActions.LOGOUT:
-            return {
-                ...state,
-                user: null
-            };
-        case AuthActions.CLEAR_ERROR:
-            return {
-                ...state,
-                authError: null
-            };
-        default: return state;
-    }
+const reducer = createReducer(
+    initialState,
+    on(AuthActions.logIn, AuthActions.signUp, state => ({
+        ...state,
+        loading: true
+    })),
+    on(AuthActions.authSuccess, (state, { user }) => ({
+        ...state,
+        user,
+        loading: false,
+        authError: null
+    })),
+    on(AuthActions.authFail, (state, { error }) => ({
+        ...state,
+        user: null,
+        loading: false,
+        authError: error
+    })),
+    on(AuthActions.logOut, state => ({
+        ...state,
+        user: null
+    })),
+    on(AuthActions.clearError, state => ({
+        ...state,
+        authError: null
+    }))
+);
+
+export function authReducer(
+    state: AuthState | undefined,
+    action: Action
+): AuthState {
+    return reducer(state, action);
 }
 
 export const getAuthState =
-    createFeatureSelector<State>('auth');
-
+    createFeatureSelector<AuthState>('auth');
