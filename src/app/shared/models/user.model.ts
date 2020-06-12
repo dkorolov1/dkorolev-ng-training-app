@@ -13,6 +13,6 @@ export class User {
 
     get tokenExpiresIn() {
         return this.tokenExpirationDate.getTime()
-            - new Date().getTime()
+            - new Date().getTime();
     }
 }

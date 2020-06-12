@@ -19,27 +19,25 @@ export class ShoppingListService {
                 acc[key] = { ...ingredients[key], id: key };
                 return acc;
             }, {}))
-        );
+        )
 
     addIngredient = (userdId: string, ingredient: Ingredient) =>
         this.httpClient.post<{ name: string }>(`${environment.fireBaseDbUrl}/sList/${userdId}.json`, { ...ingredient }).pipe(
             map(({ name }) =>
                 ({ [name]: { ...ingredient, id: name } })
             )
-        );
+        )
 
     addIngredients = (userdId: string, ingredients: Ingredient[]) =>
         forkJoin(ingredients.map(i => this.addIngredient(userdId, i))).pipe(
-            map(ingredients =>
-                ingredients.reduce((acc, i) => ({ ...acc, ...i }), {})
-            )
-        );
+            map(items => items.reduce((acc, i) => ({ ...acc, ...i }), {}))
+        )
 
     updateIngredient = (userdId: string, ingredient: Ingredient) => {
         const { id, ...ingredientData } = ingredient;
         const url = `${environment.fireBaseDbUrl}/sList/${userdId}/${id}.json`;
         return this.httpClient.put<Ingredient>(url, { ...ingredientData }).pipe(
-            map(ingredient => ({ ...ingredient, id: ingredient.id }))
+            map(ingrData => ({ ...ingrData, id: ingredient.id }))
         );
     }
 

@@ -1,6 +1,6 @@
 import * as AuthActions from './auth.actions';
 import { User } from 'src/app/shared/models/user.model';
-import { initialState, authReducer, AuthState } from "./auth.reducer";
+import { initialState, authReducer, AuthState } from './auth.reducer';
 
 describe('Auth Reducer', () => {
     const TEST_INITIAL_STATE: AuthState = {

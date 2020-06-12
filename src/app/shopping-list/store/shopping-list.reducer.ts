@@ -34,7 +34,7 @@ const reducer = createReducer(
             ingredients: {
                 ...state.ingredients, [id]: ingredientData
             }
-        }
+        };
     }),
     on(ShoppingListActions.deleteIngredientSuccess, (state, { id }) => {
         const newIngredients = { ...state.ingredients };
@@ -44,7 +44,7 @@ const reducer = createReducer(
             ingredients: { ...newIngredients },
             editedIngredient: null,
             editedIngredientId: null
-        }
+        };
     }),
     on(ShoppingListActions.startEditIngredient, (state, { id }) => ({
         ...state,

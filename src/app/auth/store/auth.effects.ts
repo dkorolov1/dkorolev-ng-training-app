@@ -19,11 +19,6 @@ export class AuthEffects {
         private autoLogOutService: AutoLogOutService,
         private fireBaseAuthService: FireBaseAuthService) { }
 
-    private handleAuth(user: User) {
-        this.localStorageService.setUser(user);
-        this.autoLogOutService.setAutoLogOutTimer(user.tokenExpiresIn);
-    }
-
     logIn = createEffect(
         () => this.actions$.pipe(
             ofType(AuthActions.logIn),
@@ -75,7 +70,7 @@ export class AuthEffects {
             })
         ),
         { dispatch: false }
-    )
+    );
 
     authRedirect = createEffect(
         () => this.actions$.pipe(
@@ -88,4 +83,9 @@ export class AuthEffects {
         ),
         { dispatch: false }
     );
+
+    private handleAuth(user: User) {
+        this.localStorageService.setUser(user);
+        this.autoLogOutService.setAutoLogOutTimer(user.tokenExpiresIn);
+    }
 }

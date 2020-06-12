@@ -30,7 +30,7 @@ const reducer = createReducer(
         return {
             ...state,
             recipes: newRecipes
-        }
+        };
     })
 );
 
