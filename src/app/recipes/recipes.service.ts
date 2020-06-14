@@ -36,9 +36,7 @@ export class RecipesService {
     }
 
     addRecipe = (recipe: Recipe) =>
-        this.httpClient.post<{ name: string }>(`${environment.fireBaseDbUrl}/recipes.json`, { ...recipe }).pipe(
-            map(({ name }) => {
-                return { id: name, ...recipe };
-            })
+        this.httpClient.post<{name: string}>(`${environment.fireBaseDbUrl}/recipes.json`, { ...recipe }).pipe(
+            map(({ name }) => ({ id: name, ...recipe }))
         )
 }

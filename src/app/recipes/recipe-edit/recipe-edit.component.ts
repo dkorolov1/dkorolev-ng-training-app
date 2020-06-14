@@ -84,10 +84,14 @@ export class RecipeEditComponent implements OnInit {
     const recipeData = {...this.recipeForm.value};
     if (this.editMode) {
       this.store.dispatch(
-        RecipesActions.updateRecipe({ id: this.editedRecipeId, ...recipeData }));
+        RecipesActions.updateRecipe({
+          recipe: { id: this.editedRecipeId, ...recipeData }
+        }));
     } else {
       this.store.dispatch(
-        RecipesActions.addRecipe(recipeData));
+        RecipesActions.addRecipe({
+          recipe: recipeData
+        }));
     }
     this.goBack();
   }

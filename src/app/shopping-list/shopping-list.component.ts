@@ -45,11 +45,16 @@ export class ShoppingListComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit(): void {
+    console.log('init');
     this.ingredients$ = this.store
       .select(ShoppingListSelectors.getAllIngredients);
   }
 
   onEditItem(id: string) {
     this.store.dispatch(ShoppingListActions.startEditIngredient({ id }));
+  }
+
+  onSave() {
+    (window as any).print();
   }
 }

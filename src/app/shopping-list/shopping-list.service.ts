@@ -14,7 +14,7 @@ export class ShoppingListService {
 
     fetchIngredients = (userId: string) =>
         this.httpClient.get(`${environment.fireBaseDbUrl}/sList/${userId}.json`).pipe(
-            map(ingredients => ingredients ? ingredients : {}),
+            map(ingredients => !!ingredients ? ingredients : {}),
             map(ingredients => Object.keys(ingredients).reduce((acc, key) => {
                 acc[key] = { ...ingredients[key], id: key };
                 return acc;

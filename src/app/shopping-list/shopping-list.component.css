@@ -1,0 +1,11 @@
+@media print {
+    .ingredient-edit, .save-btn {
+        display: none !important;
+        height: 0;
+    }
+}
+
+.save-btn  
+{
+    float: right;
+}

@@ -17,6 +17,7 @@
                     </button>
                 </div>
             </div>
+            <hr />
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
@@ -28,14 +29,14 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-                        <label for="imagePath">Image Url</label>
+                        <label for="imagePath">Image Url</label>&nbsp;<small>(Feel free to use any picture from the Internet)</small>
                         <input type="text" #imagePath formControlName="imagePath" id="imagePath" class="form-control" />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <img [src]="imagePath.value" alt="" class="img-responsive">
+                    <img [src]="imagePath.value" class="img-responsive">
                 </div>
             </div>
             <div class="row">

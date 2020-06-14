@@ -20,7 +20,7 @@ export class ShoppingListEffects {
             ofType(ShoppingListActions.fetchIngredients),
             withLatestFrom(this.store.select(AuthSelectors.getAuthUser)),
             exhaustMap(([_, user]) => this.shoppingListService.fetchIngredients(user.id).pipe(
-                map(ingredients => ShoppingListActions.addIngredientsSuccess({ ingredients }))
+                map(ingredients => ShoppingListActions.fetchIngredientsSuccess({ ingredients }))
             ))
         ));
 
