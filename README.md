@@ -2,7 +2,7 @@
 
 I started working on this app while doing the ["Angular - The Complete Guide (2020 Edition)"](https://www.udemy.com/course/the-complete-guide-to-angular-2/) course. This is the greatest and most comprehensive Angular course you can find at the moment. It covers all aspects of modern development using Angular 9 and nearby technologies.
 
-<p>The main goal was to gain hands-on skills, best practices and methodologies related to Angular development and put them into practice. I tried to cover as many topics as possible and implemented everything that I've learned in this app.</p>
+<p>The main goal was to gain hands-on skills, best practices and methodologies related to Angular development and try them out in practice. I tried to cover as many topics as possible and put into practice everything that I've learned in this app.</p>
 
 ## About this app
 
