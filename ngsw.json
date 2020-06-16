@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1592167892277,
+  "timestamp": 1592291589047,
   "index": "https://dkorolev1.github.io/dkorolev-ng-training-app/index.html",
   "assetGroups": [
     {
@@ -12,8 +12,8 @@
         "https://dkorolev1.github.io/dkorolev-ng-training-app/1-es5.bb81aed2398c7702f856.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/7-es2015.eee5439eef3466171b14.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/7-es5.eee5439eef3466171b14.js",
-        "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es2015.8f9dfd197d5d3b78b410.js",
-        "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es5.8f9dfd197d5d3b78b410.js",
+        "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es2015.8beb3a79b9384df2f731.js",
+        "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es5.8beb3a79b9384df2f731.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/9-es2015.41ba3e46ac3fdfd76cc4.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/9-es5.41ba3e46ac3fdfd76cc4.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/common-es2015.7835d021d467b1470936.js",
@@ -25,8 +25,8 @@
         "https://dkorolev1.github.io/dkorolev-ng-training-app/manifest.webmanifest",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/polyfills-es2015.b1b4539dab1840335945.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/polyfills-es5.b43423c6d88aefbdc291.js",
-        "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es2015.4213ca5c799dd928ace3.js",
-        "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es5.4213ca5c799dd928ace3.js",
+        "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es2015.0b761374632a05cb1406.js",
+        "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es5.0b761374632a05cb1406.js",
         "https://dkorolev1.github.io/dkorolev-ng-training-app/styles.51f74cb4178848fc85d0.css"
       ],
       "patterns": []
@@ -71,8 +71,8 @@
     "https://dkorolev1.github.io/dkorolev-ng-training-app/1-es5.bb81aed2398c7702f856.js": "b613c05d46e484b16bbd1eab215d3fcc2b73de6c",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/7-es2015.eee5439eef3466171b14.js": "f3bec1ea01bcb9ff47db4d4cace44fb7917c4126",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/7-es5.eee5439eef3466171b14.js": "686e3195eb383ba8df8026bd905632cc51222c36",
-    "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es2015.8f9dfd197d5d3b78b410.js": "cc91b691c2e35595d780d0d0af662a231c5febc3",
-    "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es5.8f9dfd197d5d3b78b410.js": "c20c7976d115b03b595215a4e591de53f97213ee",
+    "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es2015.8beb3a79b9384df2f731.js": "aa9425d1aa5a7af0ede016c9bc618ef90ea36811",
+    "https://dkorolev1.github.io/dkorolev-ng-training-app/8-es5.8beb3a79b9384df2f731.js": "03967f1ed34ac3cd039482a4bfbca084b871de99",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/9-es2015.41ba3e46ac3fdfd76cc4.js": "6270829cead1d714fa73e8639d518ae78b5820b3",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/9-es5.41ba3e46ac3fdfd76cc4.js": "c17881173dfe5a034df71ef7155594f4d9c0f084",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
@@ -91,14 +91,14 @@
     "https://dkorolev1.github.io/dkorolev-ng-training-app/glyphicons-halflings-regular.5be1347c682810f199c7.eot": "86b6f62b7853e67d3e635f6512a5a5efc58ea3c3",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/glyphicons-halflings-regular.82b1212e45a2bc35dd73.woff": "278e49a86e634da6f2a02f3b47dd9d2a8f26210f",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/glyphicons-halflings-regular.be810be3a3e14c682a25.woff2": "ca35b697d99cae4d1b60f2d60fcd37771987eb07",
-    "https://dkorolev1.github.io/dkorolev-ng-training-app/index.html": "fed9ef5c8ad2a46ad2779666d0f17317080890ac",
+    "https://dkorolev1.github.io/dkorolev-ng-training-app/index.html": "f389f799d46ce9ee49b66b33be8aea97d15bfb45",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/main-es2015.78ca8c847bcc0776fa77.js": "b9cb84e819dcd5ec51674d0cd8a26af16e100b10",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/main-es5.78ca8c847bcc0776fa77.js": "f43c19b5f06c0e0e28532c1073a0896da5595c52",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/manifest.webmanifest": "8487b55f57ee6f7f150586e5a5ffb0e19525bee7",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/polyfills-es2015.b1b4539dab1840335945.js": "c6df5256b53226df1d997d0b146fad0da7c48be3",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/polyfills-es5.b43423c6d88aefbdc291.js": "a60bd2b190335b8cb870fca491c3d3d142f2caae",
-    "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es2015.4213ca5c799dd928ace3.js": "22601aab1ac9056925a70868e6fba77189874dc7",
-    "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es5.4213ca5c799dd928ace3.js": "7b4115af55b5749fdac7fce7fc42785c411657fc",
+    "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es2015.0b761374632a05cb1406.js": "8e002cabfb569165ef31018435523a0c5fe066ba",
+    "https://dkorolev1.github.io/dkorolev-ng-training-app/runtime-es5.0b761374632a05cb1406.js": "27330bba06a5d207b3349a681a285aa433e27261",
     "https://dkorolev1.github.io/dkorolev-ng-training-app/styles.51f74cb4178848fc85d0.css": "3c76cae41e3f551d05179dffcde4cae399940586"
   },
   "navigationUrls": [
