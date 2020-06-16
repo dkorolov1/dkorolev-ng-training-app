@@ -37,7 +37,7 @@ export class ShoppingListService {
         const { id, ...ingredientData } = ingredient;
         const url = `${environment.fireBaseDbUrl}/sList/${userdId}/${id}.json`;
         return this.httpClient.put<Ingredient>(url, { ...ingredientData }).pipe(
-            map(ingrData => ({ ...ingrData, id: ingredient.id }))
+            map(ingrData => ({ ...ingrData, id }))
         );
     }
 

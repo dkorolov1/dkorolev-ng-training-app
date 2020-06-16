@@ -28,11 +28,10 @@ const reducer = createReducer(
         }
     })),
     on(ShoppingListActions.updateIngredientSuccess, (state, { ingredient }) => {
-        const { id, ...ingredientData } = ingredient;
         return {
             ...state,
             ingredients: {
-                ...state.ingredients, [id]: ingredientData
+                ...state.ingredients, [ingredient.id]: ingredient
             }
         };
     }),

@@ -1,3 +1,13 @@
 .recipe-img {
     max-height: 50px;
+    margin: 0 auto;
+}
+
+.recipe-desc-cell {
+    width: 80%;
+}
+
+.recipe-info-table {
+    border-collapse: separate;
+    border-spacing: 10px 0;
 }
